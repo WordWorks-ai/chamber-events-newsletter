@@ -8,6 +8,12 @@ function buildLocationLabel(event: NormalizedEvent): string {
     .join(" · ");
 }
 
+function buildLocationUrl(event: NormalizedEvent): string | null {
+  const parts = [event.locationName, event.locationAddress, event.city, event.state].filter(Boolean);
+  if (parts.length === 0) return null;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parts.join(", "))}`;
+}
+
 export function buildNewsletterViewModel(input: {
   chamber: Chamber;
   branding: BrandingAsset;
@@ -33,6 +39,7 @@ export function buildNewsletterViewModel(input: {
         dateLabel: formatDisplayDate(event.startAt, event.timezone),
         timeLabel: formatTimeRange(event.startAt, event.endAt, event.timezone, event.isAllDay),
         locationLabel: buildLocationLabel(event),
+        locationUrl: buildLocationUrl(event),
         registrationUrl: event.registrationUrl,
         tags: event.tags
       });

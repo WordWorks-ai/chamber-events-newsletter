@@ -89,6 +89,7 @@ export const newsletterEventViewSchema = z.object({
   dateLabel: z.string(),
   timeLabel: z.string(),
   locationLabel: z.string(),
+  locationUrl: z.string().url().nullable(),
   registrationUrl: z.string().url().nullable(),
   tags: z.array(z.string())
 });

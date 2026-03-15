@@ -89,7 +89,24 @@ export function NewsletterPreviewRenderer({ viewModel }: NewsletterPreviewRender
                         <p className="text-sm font-medium text-slate-700">
                           {event.dateLabel} · {event.timeLabel}
                         </p>
-                        {event.locationLabel ? <p className="text-sm text-slate-500">{event.locationLabel}</p> : null}
+                        {event.locationLabel ? (
+                          event.locationUrl ? (
+                            <a
+                              className="inline-flex items-center gap-1 text-sm text-slate-500 underline-offset-2 transition hover:text-indigo-600 hover:underline"
+                              href={event.locationUrl}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                              </svg>
+                              {event.locationLabel}
+                            </a>
+                          ) : (
+                            <p className="text-sm text-slate-500">{event.locationLabel}</p>
+                          )
+                        ) : null}
                       </div>
 
                       {event.registrationUrl ? (

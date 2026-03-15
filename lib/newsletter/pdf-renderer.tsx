@@ -238,7 +238,13 @@ function NewsletterPdfDocument({ viewModel }: { viewModel: NewsletterViewModel }
                   <Text style={styles.eventMeta}>
                     {event.dateLabel} • {event.timeLabel}
                   </Text>
-                  {event.locationLabel ? <Text style={styles.eventMeta}>{event.locationLabel}</Text> : null}
+                  {event.locationLabel ? (
+                    event.locationUrl ? (
+                      <Link src={event.locationUrl} style={styles.eventMeta}>{event.locationLabel}</Link>
+                    ) : (
+                      <Text style={styles.eventMeta}>{event.locationLabel}</Text>
+                    )
+                  ) : null}
                   {event.description ? <Text style={styles.description}>{event.description}</Text> : null}
                   {event.registrationUrl ? (
                     <Link src={event.registrationUrl} style={styles.link}>
