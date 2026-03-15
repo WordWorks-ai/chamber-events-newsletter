@@ -17,37 +17,51 @@ function toWebReadableStream(stream: NodeJS.ReadableStream): ReadableStream<Uint
 }
 
 export async function POST(request: Request) {
-  const payload = parsePdfPayload(await request.json());
-  if (!payload.ok) {
-    return resultToErrorResponse(payload);
-  }
-
-  const runtime = getRuntimeDependencies();
-  let viewModel;
-
-  if (payload.data.mode === "viewModel") {
-    viewModel = payload.data.viewModel;
-  } else {
-    const previewResult = await generateNewsletterPreview(payload.data.request, runtime);
-    if (!previewResult.ok) {
-      return resultToErrorResponse(previewResult);
+  try {
+    const payload = parsePdfPayload(await request.json());
+    if (!payload.ok) {
+      return resultToErrorResponse(payload);
     }
 
-    viewModel = previewResult.data.viewModel;
-  }
+    const runtime = getRuntimeDependencies();
+    let viewModel;
 
-  const stream = await renderNewsletterPdfStream(viewModel);
+    if (payload.data.mode === "viewModel") {
+      viewModel = payload.data.viewModel;
+    } else {
+      const previewResult = await generateNewsletterPreview(payload.data.request, runtime);
+      if (!previewResult.ok) {
+        return resultToErrorResponse(previewResult);
+      }
 
-  const safeSlug = viewModel.chamberName
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  const filename = `${safeSlug || "chamber"}-newsletter.pdf`;
-
-  return new Response(toWebReadableStream(stream), {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${filename}"`
+      viewModel = previewResult.data.viewModel;
     }
-  });
+
+    const stream = await renderNewsletterPdfStream(viewModel);
+
+    const safeSlug = viewModel.chamberName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    const filename = `${safeSlug || "chamber"}-newsletter.pdf`;
+
+    return new Response(toWebReadableStream(stream), {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="${filename}"`
+      }
+    });
+  } catch (error) {
+    console.error("[pdf] Unhandled error:", error);
+    return Response.json(
+      {
+        ok: false,
+        error: {
+          code: "INTERNAL_ERROR",
+          message: "An unexpected error occurred while generating the PDF."
+        }
+      },
+      { status: 500 }
+    );
+  }
 }

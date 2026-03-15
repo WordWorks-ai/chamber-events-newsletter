@@ -5,29 +5,43 @@ import { getRuntimeDependencies, resultToErrorResponse } from "@/lib/server/runt
 import { newsletterRequestSchema } from "@/lib/utils/validation";
 
 export async function POST(request: Request) {
-  const payload = newsletterRequestSchema.safeParse(await request.json());
-  if (!payload.success) {
+  try {
+    const payload = newsletterRequestSchema.safeParse(await request.json());
+    if (!payload.success) {
+      return Response.json(
+        {
+          ok: false,
+          error: {
+            code: "INVALID_REQUEST",
+            message: "The preview request payload is invalid.",
+            details: payload.error.flatten()
+          }
+        },
+        {
+          status: 400
+        }
+      );
+    }
+
+    const runtime = getRuntimeDependencies();
+    const result = await generateNewsletterPreview(payload.data, runtime);
+
+    if (!result.ok) {
+      return resultToErrorResponse(result);
+    }
+
+    return Response.json(result.data);
+  } catch (error) {
+    console.error("[preview] Unhandled error:", error);
     return Response.json(
       {
         ok: false,
         error: {
-          code: "INVALID_REQUEST",
-          message: "The preview request payload is invalid.",
-          details: payload.error.flatten()
+          code: "INTERNAL_ERROR",
+          message: "An unexpected error occurred while generating the preview."
         }
       },
-      {
-        status: 400
-      }
+      { status: 500 }
     );
   }
-
-  const runtime = getRuntimeDependencies();
-  const result = await generateNewsletterPreview(payload.data, runtime);
-
-  if (!result.ok) {
-    return resultToErrorResponse(result);
-  }
-
-  return Response.json(result.data);
 }
