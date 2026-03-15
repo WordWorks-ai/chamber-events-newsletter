@@ -58,7 +58,8 @@ export async function POST(request: Request) {
         ok: false,
         error: {
           code: "INTERNAL_ERROR",
-          message: "An unexpected error occurred while generating the PDF."
+          message: "An unexpected error occurred while generating the PDF.",
+          details: error instanceof Error ? `${error.message}\n${error.stack}` : String(error)
         }
       },
       { status: 500 }
