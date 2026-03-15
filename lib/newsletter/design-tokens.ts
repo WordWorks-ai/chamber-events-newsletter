@@ -5,8 +5,8 @@ export const designTokens = {
     border: "#c9d3dd",
     surface: "#ffffff",
     mutedSurface: "#f4f7fa",
-    accent: "#1d4568",
-    accentSoft: "#dbe7f1",
+    accent: "#4f46e5",
+    accentSoft: "#e0e7ff",
     success: "#275d38"
   },
   spacing: {

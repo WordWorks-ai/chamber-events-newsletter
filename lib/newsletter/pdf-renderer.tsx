@@ -96,22 +96,18 @@ const styles = StyleSheet.create({
   },
   headerTop: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 16
-  },
-  headerLeft: {
-    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
-    width: "76%"
+    marginBottom: 12
   },
   logo: {
-    width: 96,
-    height: 56,
+    width: 72,
+    height: 48,
     objectFit: "contain"
   },
   logoFallback: {
-    width: 56,
-    height: 56,
+    width: 48,
+    height: 48,
     borderRadius: 8,
     border: `1 solid ${designTokens.colors.border}`,
     alignItems: "center",
@@ -209,29 +205,22 @@ function NewsletterPdfDocument({ viewModel }: { viewModel: NewsletterViewModel }
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <View style={styles.headerTop}>
-            <View style={styles.headerLeft}>
-              {viewModel.branding.logoUrl ? (
-                <Image src={viewModel.branding.logoUrl} style={styles.logo} />
-              ) : (
-                <View style={styles.logoFallback}>
-                  <Text>{viewModel.chamberName.slice(0, 1)}</Text>
-                </View>
-              )}
-
-              <View>
-                <Text style={styles.eyebrow}>Chamber Events Newsletter</Text>
-                <Text style={styles.title}>{viewModel.newsletterTitle}</Text>
-                {viewModel.introLine ? <Text style={styles.intro}>{viewModel.introLine}</Text> : null}
+            {viewModel.branding.logoUrl ? (
+              <Image src={viewModel.branding.logoUrl} style={styles.logo} />
+            ) : (
+              <View style={styles.logoFallback}>
+                <Text>{viewModel.chamberName.slice(0, 1)}</Text>
               </View>
-            </View>
+            )}
 
-            {(viewModel.branding.symbolDataUrl || viewModel.branding.faviconUrl) ? (
-              <View style={styles.metaCard}>
-                {viewModel.branding.symbolDataUrl ? <Image src={viewModel.branding.symbolDataUrl} style={styles.symbol} /> : null}
-                <Text style={styles.metaText}>{viewModel.chamberName}</Text>
-              </View>
+            {(viewModel.branding.symbolDataUrl) ? (
+              <Image src={viewModel.branding.symbolDataUrl} style={styles.symbol} />
             ) : null}
           </View>
+
+          <Text style={styles.eyebrow}>Chamber Events Newsletter</Text>
+          <Text style={styles.title}>{viewModel.newsletterTitle}</Text>
+          {viewModel.introLine ? <Text style={styles.intro}>{viewModel.introLine}</Text> : null}
         </View>
 
         {viewModel.totalEvents === 0 ? (
