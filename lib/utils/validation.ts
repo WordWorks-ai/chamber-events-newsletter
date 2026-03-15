@@ -31,8 +31,8 @@ export const chamberSchema = z.object({
   faviconUrl: z.string().url().nullable(),
   themeColor: z.string().nullable(),
   metadata: z.record(z.string(), jsonValueSchema),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime()
+  createdAt: z.string().datetime({ offset: true }),
+  updatedAt: z.string().datetime({ offset: true })
 });
 
 export const rawScrapeResultSchema = z.object({
