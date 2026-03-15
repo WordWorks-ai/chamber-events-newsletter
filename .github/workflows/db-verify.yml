@@ -1,0 +1,54 @@
+name: DB Verify
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  verify-migrations:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: chamber_events_newsletter
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d chamber_events_newsletter"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/chamber_events_newsletter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install psql client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Apply migrations
+        run: |
+          for file in supabase/migrations/*.sql; do
+            psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$file"
+          done
+
+      - name: Verify schema objects
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "select tablename from pg_tables where schemaname = 'public' order by tablename;"
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "select indexname from pg_indexes where schemaname = 'public' order by indexname;"
+
+      - name: Reset schema and reapply migrations
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "drop schema public cascade; create schema public;"
+          for file in supabase/migrations/*.sql; do
+            psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$file"
+          done
+
+      - name: Verify reset tables exist
+        run: |
+          psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -c "select count(*) from information_schema.tables where table_schema = 'public' and table_name in ('chambers', 'scrape_cache', 'newsletter_runs');"
