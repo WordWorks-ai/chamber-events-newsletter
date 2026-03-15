@@ -1,21 +1,17 @@
-import { z } from "zod";
-
-const bodySchema = z.object({
-  password: z.string().min(1)
-});
-
 export async function POST(request: Request) {
   const expected = process.env.APP_PASSWORD;
   if (!expected) {
     return Response.json({ ok: true });
   }
 
-  const parsed = bodySchema.safeParse(await request.json());
-  if (!parsed.success) {
+  let body: { password?: string };
+  try {
+    body = (await request.json()) as { password?: string };
+  } catch {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  if (parsed.data.password !== expected) {
+  if (typeof body.password !== "string" || body.password !== expected) {
     return Response.json({ ok: false }, { status: 401 });
   }
 
