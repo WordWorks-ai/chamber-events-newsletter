@@ -59,7 +59,7 @@ export const jsonLdEventAdapter: ChamberScraperAdapter = {
         description: asString(event.description) ?? "",
         startDate: asString(event.startDate) ?? "",
         endDate: asString(event.endDate),
-        timezone: asString(event.eventAttendanceMode),
+        timezone: null,
         locationName: asString(location?.name),
         locationAddress: asString(address?.streetAddress),
         city: asString(address?.addressLocality),

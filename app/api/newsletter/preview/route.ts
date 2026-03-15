@@ -38,8 +38,7 @@ export async function POST(request: Request) {
         ok: false,
         error: {
           code: "INTERNAL_ERROR",
-          message: "An unexpected error occurred while generating the preview.",
-          details: error instanceof Error ? error.message : String(error)
+          message: "An unexpected error occurred while generating the preview."
         }
       },
       { status: 500 }
