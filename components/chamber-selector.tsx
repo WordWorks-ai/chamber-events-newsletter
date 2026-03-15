@@ -12,13 +12,13 @@ interface ChamberSelectorProps {
 }
 
 const STATE_NAMES: Record<string, string> = {
-  AL: "Alabama", AZ: "Arizona", CA: "California", CO: "Colorado", CT: "Connecticut",
-  DC: "District of Columbia", FL: "Florida", GA: "Georgia", HI: "Hawaii", IA: "Iowa",
-  IL: "Illinois", IN: "Indiana", KS: "Kansas", LA: "Louisiana", MA: "Massachusetts",
-  MD: "Maryland", MI: "Michigan", MN: "Minnesota", MO: "Missouri", NC: "North Carolina",
-  NE: "Nebraska", NM: "New Mexico", NV: "Nevada", NY: "New York", OH: "Ohio",
-  OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania", SC: "South Carolina", TN: "Tennessee",
-  TX: "Texas", UT: "Utah", VA: "Virginia", WA: "Washington", WI: "Wisconsin"
+  AL: "Alabama", AZ: "Arizona", CA: "California", CO: "Colorado",
+  FL: "Florida", GA: "Georgia", HI: "Hawaii", IA: "Iowa",
+  IL: "Illinois", IN: "Indiana", KS: "Kansas", LA: "Louisiana",
+  MD: "Maryland", MI: "Michigan", MO: "Missouri", NC: "North Carolina",
+  NE: "Nebraska", NM: "New Mexico", NY: "New York", OH: "Ohio",
+  OK: "Oklahoma", SC: "South Carolina", TN: "Tennessee",
+  TX: "Texas", UT: "Utah", WA: "Washington", WI: "Wisconsin"
 };
 
 function stateLabel(code: string): string {

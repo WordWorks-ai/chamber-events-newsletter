@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Scrape public chamber of commerce events and generate polished newsletter previews with PDF export.",
   openGraph: {
     title: "Chamber Events Newsletter",
-    description: "80+ chambers across 35 states. Select a chamber, generate a branded newsletter, and download as PDF.",
+    description: "50 chambers across 25+ states. Select a chamber, generate a branded newsletter, and download as PDF.",
     type: "website",
     siteName: "Chamber Events Newsletter"
   },

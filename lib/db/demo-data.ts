@@ -76,15 +76,6 @@ export const seededChambers: Chamber[] = [
     "OH"
   ),
   chamber(
-    "hilliard-area-chamber",
-    "Hilliard Area Chamber of Commerce",
-    "https://www.hilliardchamber.org",
-    "https://business.hilliardchamber.org/events/calendar",
-    "growthzone-family-adapter",
-    "Hilliard",
-    "OH"
-  ),
-  chamber(
     "grove-city-chamber",
     "Grove City Area Chamber of Commerce",
     "https://www.gcchamber.org",
@@ -112,66 +103,12 @@ export const seededChambers: Chamber[] = [
     "OH"
   ),
   chamber(
-    "gahanna-chamber",
-    "Gahanna Area Chamber of Commerce",
-    "https://www.gahannachamber.com",
-    "https://business.gahannachamber.com/events/calendar",
-    "growthzone-family-adapter",
-    "Gahanna",
-    "OH"
-  ),
-  chamber(
-    "reynoldsburg-chamber",
-    "Reynoldsburg Area Chamber of Commerce",
-    "https://www.reynoldsburgchamber.com",
-    "https://business.reynoldsburgchamber.com/events/calendar",
-    "growthzone-family-adapter",
-    "Reynoldsburg",
-    "OH"
-  ),
-  chamber(
-    "upper-arlington-chamber",
-    "Upper Arlington Area Chamber of Commerce",
-    "https://www.uachamber.org",
-    "https://business.uachamber.org/events/calendar",
-    "growthzone-family-adapter",
-    "Upper Arlington",
-    "OH"
-  ),
-  chamber(
-    "worthington-chamber",
-    "Worthington Area Chamber of Commerce",
-    "https://www.worthingtonchamber.org",
-    "https://business.worthingtonchamber.org/events/calendar",
-    "growthzone-family-adapter",
-    "Worthington",
-    "OH"
-  ),
-  chamber(
     "greater-akron-chamber",
     "Greater Akron Chamber",
     "https://www.greaterakronchamber.org",
     "https://www.greaterakronchamber.org/events",
     "jsonld-event-adapter",
     "Akron",
-    "OH"
-  ),
-  chamber(
-    "greater-cleveland-partnership",
-    "Greater Cleveland Partnership",
-    "https://www.gcpartnership.com",
-    "https://www.gcpartnership.com/events",
-    null,
-    "Cleveland",
-    "OH"
-  ),
-  chamber(
-    "cincinnati-usa-chamber",
-    "Cincinnati USA Regional Chamber",
-    "https://www.cincinnatichamber.com",
-    "https://www.cincinnatichamber.com/events",
-    null,
-    "Cincinnati",
     "OH"
   ),
   chamber(
@@ -235,26 +172,6 @@ export const seededChambers: Chamber[] = [
     "America/Chicago"
   ),
   chamber(
-    "fort-worth-chamber",
-    "Fort Worth Chamber of Commerce",
-    "https://www.fortworthchamber.com",
-    "https://www.fortworthchamber.com/events",
-    null,
-    "Fort Worth",
-    "TX",
-    "America/Chicago"
-  ),
-  chamber(
-    "plano-chamber",
-    "Plano Chamber of Commerce",
-    "https://www.planochamber.org",
-    "https://business.planochamber.org/events/calendar",
-    "growthzone-family-adapter",
-    "Plano",
-    "TX",
-    "America/Chicago"
-  ),
-  chamber(
     "frisco-chamber",
     "Frisco Chamber of Commerce",
     "https://www.friscochamber.com",
@@ -266,16 +183,6 @@ export const seededChambers: Chamber[] = [
   ),
 
   // ── California ────────────────────────────────────────────────────────
-  chamber(
-    "la-area-chamber",
-    "Los Angeles Area Chamber of Commerce",
-    "https://www.lachamber.com",
-    "https://www.lachamber.com/events",
-    null,
-    "Los Angeles",
-    "CA",
-    "America/Los_Angeles"
-  ),
   chamber(
     "sf-chamber",
     "San Francisco Chamber of Commerce",
@@ -293,16 +200,6 @@ export const seededChambers: Chamber[] = [
     "https://www.sdchamber.org/events/",
     null,
     "San Diego",
-    "CA",
-    "America/Los_Angeles"
-  ),
-  chamber(
-    "san-jose-chamber",
-    "San Jose Chamber of Commerce",
-    "https://www.sjchamber.com",
-    "https://www.sjchamber.com/events",
-    null,
-    "San Jose",
     "CA",
     "America/Los_Angeles"
   ),
@@ -326,27 +223,8 @@ export const seededChambers: Chamber[] = [
     "CA",
     "America/Los_Angeles"
   ),
-  chamber(
-    "oakland-chamber",
-    "Oakland Metropolitan Chamber of Commerce",
-    "https://www.oaklandchamber.com",
-    "https://www.oaklandchamber.com/events",
-    null,
-    "Oakland",
-    "CA",
-    "America/Los_Angeles"
-  ),
 
   // ── New York ──────────────────────────────────────────────────────────
-  chamber(
-    "nyc-partnership",
-    "Partnership for New York City",
-    "https://pfnyc.org",
-    "https://pfnyc.org/events/",
-    null,
-    "New York City",
-    "NY"
-  ),
   chamber(
     "brooklyn-chamber",
     "Brooklyn Chamber of Commerce",
@@ -356,35 +234,8 @@ export const seededChambers: Chamber[] = [
     "Brooklyn",
     "NY"
   ),
-  chamber(
-    "buffalo-niagara-partnership",
-    "Buffalo Niagara Partnership",
-    "https://www.thepartnership.org",
-    "https://www.thepartnership.org/events/",
-    null,
-    "Buffalo",
-    "NY"
-  ),
-  chamber(
-    "rochester-chamber",
-    "Greater Rochester Chamber of Commerce",
-    "https://www.greaterrochesterchamber.com",
-    "https://www.greaterrochesterchamber.com/events",
-    null,
-    "Rochester",
-    "NY"
-  ),
 
   // ── Florida ───────────────────────────────────────────────────────────
-  chamber(
-    "miami-dade-chamber",
-    "Greater Miami Chamber of Commerce",
-    "https://www.miamichamber.com",
-    "https://www.miamichamber.com/events",
-    null,
-    "Miami",
-    "FL"
-  ),
   chamber(
     "tampa-bay-chamber",
     "Greater Tampa Chamber of Commerce",
@@ -412,15 +263,6 @@ export const seededChambers: Chamber[] = [
     "Jacksonville",
     "FL"
   ),
-  chamber(
-    "fort-lauderdale-chamber",
-    "Greater Fort Lauderdale Chamber of Commerce",
-    "https://www.ftlchamber.com",
-    "https://www.ftlchamber.com/events",
-    null,
-    "Fort Lauderdale",
-    "FL"
-  ),
 
   // ── Illinois ──────────────────────────────────────────────────────────
   chamber(
@@ -432,46 +274,6 @@ export const seededChambers: Chamber[] = [
     "Chicago",
     "IL",
     "America/Chicago"
-  ),
-  chamber(
-    "naperville-chamber",
-    "Naperville Area Chamber of Commerce",
-    "https://www.naperville.net",
-    "https://business.naperville.net/events/calendar",
-    "growthzone-family-adapter",
-    "Naperville",
-    "IL",
-    "America/Chicago"
-  ),
-  chamber(
-    "springfield-il-chamber",
-    "Greater Springfield Chamber of Commerce",
-    "https://www.gscc.org",
-    "https://www.gscc.org/events/",
-    null,
-    "Springfield",
-    "IL",
-    "America/Chicago"
-  ),
-
-  // ── Pennsylvania ──────────────────────────────────────────────────────
-  chamber(
-    "philadelphia-chamber",
-    "Chamber of Commerce for Greater Philadelphia",
-    "https://www.chamberphl.com",
-    "https://www.chamberphl.com/events",
-    null,
-    "Philadelphia",
-    "PA"
-  ),
-  chamber(
-    "pittsburgh-chamber",
-    "Greater Pittsburgh Chamber of Commerce",
-    "https://www.pittsburghchamber.com",
-    "https://www.pittsburghchamber.com/events/",
-    null,
-    "Pittsburgh",
-    "PA"
   ),
 
   // ── Georgia ───────────────────────────────────────────────────────────
@@ -495,15 +297,6 @@ export const seededChambers: Chamber[] = [
   ),
 
   // ── North Carolina ────────────────────────────────────────────────────
-  chamber(
-    "charlotte-chamber",
-    "Charlotte Regional Business Alliance",
-    "https://www.charlottealliance.org",
-    "https://www.charlottealliance.org/events",
-    null,
-    "Charlotte",
-    "NC"
-  ),
   chamber(
     "raleigh-chamber",
     "Raleigh Chamber of Commerce",
@@ -546,16 +339,6 @@ export const seededChambers: Chamber[] = [
     "America/Phoenix"
   ),
   chamber(
-    "tucson-chamber",
-    "Tucson Metro Chamber",
-    "https://www.tucsonchamber.org",
-    "https://www.tucsonchamber.org/events/",
-    null,
-    "Tucson",
-    "AZ",
-    "America/Phoenix"
-  ),
-  chamber(
     "scottsdale-chamber",
     "Scottsdale Area Chamber of Commerce",
     "https://www.scottsdalechamber.com",
@@ -576,17 +359,6 @@ export const seededChambers: Chamber[] = [
     "Seattle",
     "WA",
     "America/Los_Angeles"
-  ),
-
-  // ── Massachusetts ─────────────────────────────────────────────────────
-  chamber(
-    "boston-chamber",
-    "Greater Boston Chamber of Commerce",
-    "https://www.bostonchamber.com",
-    "https://www.bostonchamber.com/events/",
-    null,
-    "Boston",
-    "MA"
   ),
 
   // ── Colorado ──────────────────────────────────────────────────────────
@@ -633,29 +405,7 @@ export const seededChambers: Chamber[] = [
     "America/Chicago"
   ),
 
-  // ── Minnesota ─────────────────────────────────────────────────────────
-  chamber(
-    "minneapolis-chamber",
-    "Minneapolis Regional Chamber",
-    "https://www.minneapolischamber.org",
-    "https://www.minneapolischamber.org/events/",
-    null,
-    "Minneapolis",
-    "MN",
-    "America/Chicago"
-  ),
-
   // ── Missouri ──────────────────────────────────────────────────────────
-  chamber(
-    "stl-chamber",
-    "St. Louis Regional Chamber",
-    "https://www.stlregionalchamber.com",
-    "https://www.stlregionalchamber.com/events",
-    null,
-    "St. Louis",
-    "MO",
-    "America/Chicago"
-  ),
   chamber(
     "kc-chamber",
     "Greater Kansas City Chamber of Commerce",
@@ -665,26 +415,6 @@ export const seededChambers: Chamber[] = [
     "Kansas City",
     "MO",
     "America/Chicago"
-  ),
-
-  // ── Virginia ──────────────────────────────────────────────────────────
-  chamber(
-    "nova-chamber",
-    "Northern Virginia Chamber of Commerce",
-    "https://www.novachamber.org",
-    "https://www.novachamber.org/events/",
-    null,
-    "Northern Virginia",
-    "VA"
-  ),
-  chamber(
-    "richmond-chamber",
-    "Greater Richmond Partnership",
-    "https://www.grpva.com",
-    "https://www.grpva.com/events/",
-    null,
-    "Richmond",
-    "VA"
   ),
 
   // ── Indiana ───────────────────────────────────────────────────────────
@@ -719,30 +449,6 @@ export const seededChambers: Chamber[] = [
     null,
     "Baltimore",
     "MD"
-  ),
-
-  // ── Oregon ────────────────────────────────────────────────────────────
-  chamber(
-    "portland-chamber",
-    "Portland Business Alliance",
-    "https://www.portlandalliance.com",
-    "https://www.portlandalliance.com/events",
-    null,
-    "Portland",
-    "OR",
-    "America/Los_Angeles"
-  ),
-
-  // ── Nevada ────────────────────────────────────────────────────────────
-  chamber(
-    "las-vegas-chamber",
-    "Las Vegas Metro Chamber of Commerce",
-    "https://www.lvchamber.com",
-    "https://www.lvchamber.com/events/",
-    null,
-    "Las Vegas",
-    "NV",
-    "America/Los_Angeles"
   ),
 
   // ── Utah ──────────────────────────────────────────────────────────────
@@ -790,17 +496,6 @@ export const seededChambers: Chamber[] = [
     "Birmingham",
     "AL",
     "America/Chicago"
-  ),
-
-  // ── Connecticut ───────────────────────────────────────────────────────
-  chamber(
-    "hartford-chamber",
-    "MetroHartford Alliance",
-    "https://www.metrohartford.com",
-    "https://www.metrohartford.com/events/",
-    null,
-    "Hartford",
-    "CT"
   ),
 
   // ── Iowa ──────────────────────────────────────────────────────────────
@@ -873,16 +568,5 @@ export const seededChambers: Chamber[] = [
     "Honolulu",
     "HI",
     "Pacific/Honolulu"
-  ),
-
-  // ── DC ────────────────────────────────────────────────────────────────
-  chamber(
-    "dc-chamber",
-    "DC Chamber of Commerce",
-    "https://www.dcchamber.org",
-    "https://www.dcchamber.org/events/",
-    null,
-    "Washington",
-    "DC"
   )
 ];
