@@ -68,8 +68,8 @@ export const normalizedEventSchema = z.object({
   sourceUrl: z.string().url(),
   title: z.string().min(1),
   description: z.string(),
-  startAt: z.string().datetime(),
-  endAt: z.string().datetime().nullable(),
+  startAt: z.string().datetime({ offset: true }),
+  endAt: z.string().datetime({ offset: true }).nullable(),
   timezone: z.string().min(1),
   locationName: z.string().nullable(),
   locationAddress: z.string().nullable(),
@@ -107,7 +107,7 @@ export const newsletterViewModelSchema = z.object({
   newsletterTitle: z.string(),
   introLine: z.string().nullable(),
   generatedAtLabel: z.string(),
-  generatedAtIso: z.string().datetime(),
+  generatedAtIso: z.string().datetime({ offset: true }),
   footerAttribution: z.string(),
   emptyStateMessage: z.string(),
   branding: z.object({
@@ -135,7 +135,7 @@ export const newsletterPreviewResponseSchema = z.object({
   viewModel: newsletterViewModelSchema,
   cache: z.object({
     hit: z.boolean(),
-    expiresAt: z.string().datetime().nullable()
+    expiresAt: z.string().datetime({ offset: true }).nullable()
   }),
   runId: z.string().uuid()
 });
