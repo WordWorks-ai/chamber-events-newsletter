@@ -195,6 +195,11 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginBottom: 6
+  },
+  generatedAt: {
+    fontSize: 8,
+    color: designTokens.colors.slate,
+    marginTop: 4
   }
 });
 
@@ -220,11 +225,12 @@ function NewsletterPdfDocument({ viewModel }: { viewModel: NewsletterViewModel }
               </View>
             </View>
 
-            <View style={styles.metaCard}>
-              {viewModel.branding.symbolDataUrl ? <Image src={viewModel.branding.symbolDataUrl} style={styles.symbol} /> : null}
-              <Text style={styles.metaText}>{viewModel.chamberName}</Text>
-              <Text style={styles.metaText}>{viewModel.generatedAtLabel}</Text>
-            </View>
+            {(viewModel.branding.symbolDataUrl || viewModel.branding.faviconUrl) ? (
+              <View style={styles.metaCard}>
+                {viewModel.branding.symbolDataUrl ? <Image src={viewModel.branding.symbolDataUrl} style={styles.symbol} /> : null}
+                <Text style={styles.metaText}>{viewModel.chamberName}</Text>
+              </View>
+            ) : null}
           </View>
         </View>
 
@@ -258,6 +264,7 @@ function NewsletterPdfDocument({ viewModel }: { viewModel: NewsletterViewModel }
 
         <View style={styles.footer}>
           <Text>{viewModel.footerAttribution}</Text>
+          <Text style={styles.generatedAt}>{viewModel.generatedAtLabel}</Text>
           <Link src={viewModel.chamberWebsiteUrl} style={styles.link}>
             {viewModel.chamberWebsiteUrl}
           </Link>

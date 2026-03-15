@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Chamber Events Newsletter",
-  description: "Deterministic chamber event scraping with polished newsletter previews and PDF export."
+  description: "Scrape public chamber of commerce events and generate polished newsletter previews with PDF export."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
