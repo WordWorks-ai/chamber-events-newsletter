@@ -12,27 +12,52 @@ interface ChamberSelectorProps {
 }
 
 const STATE_NAMES: Record<string, string> = {
-  AL: "Alabama", AZ: "Arizona", CA: "California", CO: "Colorado",
-  FL: "Florida", GA: "Georgia", HI: "Hawaii", IA: "Iowa",
-  IL: "Illinois", IN: "Indiana", KS: "Kansas", LA: "Louisiana",
-  MD: "Maryland", MI: "Michigan", MO: "Missouri", NC: "North Carolina",
-  NE: "Nebraska", NM: "New Mexico", NY: "New York", OH: "Ohio",
-  OK: "Oklahoma", SC: "South Carolina", TN: "Tennessee",
-  TX: "Texas", UT: "Utah", WA: "Washington", WI: "Wisconsin"
+  AL: "Alabama",
+  AZ: "Arizona",
+  CA: "California",
+  CO: "Colorado",
+  FL: "Florida",
+  GA: "Georgia",
+  HI: "Hawaii",
+  IA: "Iowa",
+  IL: "Illinois",
+  IN: "Indiana",
+  KS: "Kansas",
+  LA: "Louisiana",
+  MD: "Maryland",
+  MI: "Michigan",
+  MO: "Missouri",
+  NC: "North Carolina",
+  NE: "Nebraska",
+  NM: "New Mexico",
+  NY: "New York",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  SC: "South Carolina",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  WA: "Washington",
+  WI: "Wisconsin"
 };
 
 function stateLabel(code: string): string {
   return STATE_NAMES[code] ?? code;
 }
 
-export function ChamberSelector({ chambers, value, disabled, onChange }: ChamberSelectorProps) {
+export function ChamberSelector({
+  chambers,
+  value,
+  disabled,
+  onChange
+}: ChamberSelectorProps) {
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim();
     if (!q) return chambers;
     return chambers.filter((c) => {
-      const meta = c.metadata as Record<string, unknown>;
+      const meta = c.metadata;
       const state = typeof meta.state === "string" ? meta.state : "";
       const region = typeof meta.region === "string" ? meta.region : "";
       return (
@@ -47,20 +72,27 @@ export function ChamberSelector({ chambers, value, disabled, onChange }: Chamber
   const grouped = useMemo(() => {
     const groups = new Map<string, Chamber[]>();
     for (const c of filtered) {
-      const meta = c.metadata as Record<string, unknown>;
+      const meta = c.metadata;
       const state = typeof meta.state === "string" ? meta.state : "Other";
       const existing = groups.get(state) ?? [];
       existing.push(c);
       groups.set(state, existing);
     }
-    return [...groups.entries()].sort((a, b) => stateLabel(a[0]).localeCompare(stateLabel(b[0])));
+    return [...groups.entries()].sort((a, b) =>
+      stateLabel(a[0]).localeCompare(stateLabel(b[0]))
+    );
   }, [filtered]);
 
   const selectedChamber = chambers.find((c) => c.id === value);
 
   return (
     <div className="space-y-2">
-      <span className="text-sm font-semibold text-slate-800">Choose a Chamber</span>
+      <label
+        className="text-sm font-semibold text-slate-800"
+        htmlFor="chamber-selector"
+      >
+        Choose a Chamber
+      </label>
       <input
         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
         disabled={disabled}
@@ -70,10 +102,10 @@ export function ChamberSelector({ chambers, value, disabled, onChange }: Chamber
         value={search}
       />
       <select
+        id="chamber-selector"
         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100"
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        size={Math.min(12, Math.max(6, filtered.length + grouped.length))}
         value={value}
       >
         {grouped.map(([state, items]) => (
@@ -88,7 +120,10 @@ export function ChamberSelector({ chambers, value, disabled, onChange }: Chamber
       </select>
       {selectedChamber && (
         <p className="text-xs text-slate-500">
-          Selected: <span className="font-medium text-slate-700">{selectedChamber.name}</span>
+          Selected:{" "}
+          <span className="font-medium text-slate-700">
+            {selectedChamber.name}
+          </span>
         </p>
       )}
     </div>
