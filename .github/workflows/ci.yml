@@ -9,7 +9,6 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     env:
-      SCRAPER_FIXTURE_MODE: "true"
       CI: "true"
     steps:
       - name: Checkout
