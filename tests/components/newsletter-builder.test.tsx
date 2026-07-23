@@ -18,17 +18,27 @@ describe("NewsletterBuilder", () => {
     const user = userEvent.setup();
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify(seededChambers), { status: 200 }))
-      .mockResolvedValueOnce(new Response(JSON.stringify(makePreviewResponse()), { status: 200 }));
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(seededChambers), { status: 200 })
+      )
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(makePreviewResponse()), { status: 200 })
+      );
 
     vi.stubGlobal("fetch", fetchMock);
 
     render(<NewsletterBuilder />);
 
-    await waitFor(() => expect(screen.getByRole("combobox")).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: /^process$/i }));
+    await waitFor(() =>
+      expect(screen.getByRole("combobox")).toBeInTheDocument()
+    );
+    await user.click(
+      screen.getByRole("button", { name: /^process newsletter$/i })
+    );
 
-    await waitFor(() => expect(screen.getByText(/preview ready/i)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText(/preview ready/i)).toBeInTheDocument()
+    );
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
@@ -36,7 +46,9 @@ describe("NewsletterBuilder", () => {
     const user = userEvent.setup();
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify(seededChambers), { status: 200 }))
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(seededChambers), { status: 200 })
+      )
       .mockResolvedValueOnce(
         new Response(
           JSON.stringify({
@@ -53,20 +65,37 @@ describe("NewsletterBuilder", () => {
 
     render(<NewsletterBuilder />);
 
-    await waitFor(() => expect(screen.getByRole("combobox")).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: /^process$/i }));
+    await waitFor(() =>
+      expect(screen.getByRole("combobox")).toBeInTheDocument()
+    );
+    await user.click(
+      screen.getByRole("button", { name: /^process newsletter$/i })
+    );
 
-    await waitFor(() => expect(screen.getByText(/something went wrong/i)).toBeInTheDocument());
-    expect(screen.getByText(/unable to generate the newsletter preview/i)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
+    );
+    expect(
+      screen.getByText(/unable to generate the newsletter preview/i)
+    ).toBeInTheDocument();
   });
 
   it("downloads a PDF after a preview is generated", async () => {
     const user = userEvent.setup();
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(new Response(JSON.stringify(seededChambers), { status: 200 }))
-      .mockResolvedValueOnce(new Response(JSON.stringify(makePreviewResponse()), { status: 200 }))
-      .mockResolvedValueOnce(new Response("%PDF-test", { status: 200, headers: { "content-type": "application/pdf" } }));
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(seededChambers), { status: 200 })
+      )
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify(makePreviewResponse()), { status: 200 })
+      )
+      .mockResolvedValueOnce(
+        new Response("%PDF-test", {
+          status: 200,
+          headers: { "content-type": "application/pdf" }
+        })
+      );
 
     const createObjectURL = vi.fn().mockReturnValue("blob:newsletter");
     const revokeObjectURL = vi.fn();
@@ -78,7 +107,9 @@ describe("NewsletterBuilder", () => {
 
     const click = vi.fn();
     const originalCreateElement = document.createElement.bind(document);
-    vi.spyOn(document, "createElement").mockImplementation(((tagName: string) => {
+    vi.spyOn(document, "createElement").mockImplementation(((
+      tagName: string
+    ) => {
       const element = originalCreateElement(tagName);
       if (tagName === "a") {
         Object.assign(element, { click });
@@ -88,9 +119,17 @@ describe("NewsletterBuilder", () => {
 
     render(<NewsletterBuilder />);
 
-    await waitFor(() => expect(screen.getByRole("combobox")).toBeInTheDocument());
-    await user.click(screen.getByRole("button", { name: /^process$/i }));
-    await waitFor(() => expect(screen.getByRole("button", { name: /download pdf/i })).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByRole("combobox")).toBeInTheDocument()
+    );
+    await user.click(
+      screen.getByRole("button", { name: /^process newsletter$/i })
+    );
+    await waitFor(() =>
+      expect(
+        screen.getByRole("button", { name: /download pdf/i })
+      ).toBeInTheDocument()
+    );
     await user.click(screen.getByRole("button", { name: /download pdf/i }));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(3));

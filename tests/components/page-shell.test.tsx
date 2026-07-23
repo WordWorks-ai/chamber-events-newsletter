@@ -14,11 +14,18 @@ vi.mock("next/font/google", () => ({
 describe("page shell", () => {
   it("renders the main landing page copy", async () => {
     const { default: HomePage } = await import("@/app/page");
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(JSON.stringify(seededChambers), { status: 200 })));
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockResolvedValue(
+          new Response(JSON.stringify(seededChambers), { status: 200 })
+        )
+    );
     render(<HomePage />);
 
     expect(
-      screen.getByRole("heading", {
+      await screen.findByRole("heading", {
         name: /deterministic chamber event newsletters/i
       })
     ).toBeInTheDocument();

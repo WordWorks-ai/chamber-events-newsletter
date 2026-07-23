@@ -22,7 +22,6 @@ export const growthzoneFamilyAdapter: ChamberScraperAdapter = {
     const lowerHtml = input.html.toLowerCase();
     const lowerUrl = input.url.toLowerCase();
     return (
-      lowerUrl.includes("/events/calendar") ||
       lowerUrl.includes("growthzone") ||
       lowerHtml.includes("site by growthzone") ||
       lowerHtml.includes("gz-event-card") ||
@@ -33,7 +32,9 @@ export const growthzoneFamilyAdapter: ChamberScraperAdapter = {
     const $ = cheerio.load(input.html);
 
     // Try card-based selectors first
-    const cardBlocks = $(".gz-event-card, .event-card, .card.event, article.event, li.event").toArray();
+    const cardBlocks = $(
+      ".gz-event-card, .event-card, .card.event, article.event, li.event"
+    ).toArray();
 
     // Also try calendar view selectors (li.gz-cal-event)
     const calendarBlocks = $("li.gz-cal-event").toArray();
@@ -62,23 +63,34 @@ export const growthzoneFamilyAdapter: ChamberScraperAdapter = {
         dateText = timeDate
           ? timeDate
           : normalizeWhitespace(
-              `${element.find(".gz-date, .event-date, .date").first().text() || element
-                .find("[data-event-date]")
-                .first()
-                .attr("data-event-date") || ""} ${
-                element.find(".gz-time, .event-time, .time").first().text() || element
+              `${
+                element.find(".gz-date, .event-date, .date").first().text() ||
+                element
+                  .find("[data-event-date]")
+                  .first()
+                  .attr("data-event-date") ||
+                ""
+              } ${
+                element.find(".gz-time, .event-time, .time").first().text() ||
+                element
                   .find("[data-event-time]")
                   .first()
-                  .attr("data-event-time") || ""
+                  .attr("data-event-time") ||
+                ""
               }`
             );
         title =
           normalizeWhitespace(
-            element.find("h2, h3, h4, .event-title, .gz-title, .card-title").first().text() ||
-              element.find("a").first().text()
+            element
+              .find("h2, h3, h4, .event-title, .gz-title, .card-title")
+              .first()
+              .text() || element.find("a").first().text()
           ) || "";
         registrationUrl =
-          element.find('a[href*="/events/details/"], a[href*="register"]').first().attr("href") ??
+          element
+            .find('a[href*="/events/details/"], a[href*="register"]')
+            .first()
+            .attr("href") ??
           element.find("a").first().attr("href") ??
           input.url;
       }
@@ -91,7 +103,10 @@ export const growthzoneFamilyAdapter: ChamberScraperAdapter = {
         description: isCalendarView
           ? ""
           : normalizeWhitespace(
-              element.find(".event-description, .description, .event-summary, p").first().text()
+              element
+                .find(".event-description, .description, .event-summary, p")
+                .first()
+                .text()
             ),
         startDate: dateText,
         endDate: null,
@@ -99,7 +114,10 @@ export const growthzoneFamilyAdapter: ChamberScraperAdapter = {
         locationName: isCalendarView
           ? null
           : normalizeWhitespace(
-              element.find(".event-location, .location, [data-location]").first().text()
+              element
+                .find(".event-location, .location, [data-location]")
+                .first()
+                .text()
             ) || null,
         locationAddress: null,
         city: null,
