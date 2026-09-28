@@ -26,7 +26,7 @@ describe("page shell", () => {
 
     expect(
       await screen.findByRole("heading", {
-        name: /deterministic chamber event newsletters/i
+        name: /^chamber event newsletters/i
       })
     ).toBeInTheDocument();
   });

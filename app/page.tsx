@@ -12,8 +12,7 @@ export default function HomePage() {
           <div className="mt-4 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <h1 className="bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-800 bg-clip-text text-4xl font-semibold tracking-tight text-transparent md:text-5xl">
-                Deterministic chamber event newsletters, ready for review and
-                PDF export.
+                Chamber event newsletters, ready for review and PDF export.
               </h1>
             </div>
             <p className="max-w-xl text-sm leading-7 text-slate-600 md:text-base">

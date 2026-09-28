@@ -7,7 +7,7 @@ test("homepage loads, processes a seeded chamber, previews, and downloads a PDF"
 
   await expect(
     page.getByRole("heading", {
-      name: /deterministic chamber event newsletters/i
+      name: /^chamber event newsletters/i
     })
   ).toBeVisible();
 
