@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.APP_URL ?? "http://127.0.0.1:3000"),
+  metadataBase: process.env.APP_URL ? new URL(process.env.APP_URL) : undefined,
   title: "Chamber Events Newsletter",
   description:
     "Scrape public chamber of commerce events and generate polished newsletter previews with PDF export.",
