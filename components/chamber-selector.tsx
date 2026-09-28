@@ -106,6 +106,7 @@ export function ChamberSelector({
         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 disabled:bg-slate-100"
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
+        size={Math.min(12, Math.max(6, filtered.length + grouped.length))}
         value={value}
       >
         {grouped.map(([state, items]) => (

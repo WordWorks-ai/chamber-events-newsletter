@@ -12,7 +12,7 @@ test("homepage loads, processes a seeded chamber, previews, and downloads a PDF"
   ).toBeVisible();
 
   await page
-    .getByRole("combobox")
+    .getByRole("listbox")
     .selectOption({ label: "Columbus Chamber of Commerce" });
   await page.getByRole("button", { name: /^process newsletter$/i }).click();
 
@@ -97,7 +97,7 @@ test("shows graceful feedback when no events are returned", async ({
 
   await page.goto("/");
   await page
-    .getByRole("combobox")
+    .getByRole("listbox")
     .selectOption({ label: "Columbus Chamber of Commerce" });
   await page.getByRole("button", { name: /^process newsletter$/i }).click();
 
@@ -126,7 +126,7 @@ test("shows a friendly inline error when preview generation fails", async ({
 
   await page.goto("/");
   await page
-    .getByRole("combobox")
+    .getByRole("listbox")
     .selectOption({ label: "Columbus Chamber of Commerce" });
   await page.getByRole("button", { name: /^process newsletter$/i }).click();
 

@@ -30,7 +30,7 @@ describe("NewsletterBuilder", () => {
     render(<NewsletterBuilder />);
 
     await waitFor(() =>
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("listbox")).toBeInTheDocument()
     );
     await user.click(
       screen.getByRole("button", { name: /^process newsletter$/i })
@@ -66,7 +66,7 @@ describe("NewsletterBuilder", () => {
     render(<NewsletterBuilder />);
 
     await waitFor(() =>
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("listbox")).toBeInTheDocument()
     );
     await user.click(
       screen.getByRole("button", { name: /^process newsletter$/i })
@@ -120,7 +120,7 @@ describe("NewsletterBuilder", () => {
     render(<NewsletterBuilder />);
 
     await waitFor(() =>
-      expect(screen.getByRole("combobox")).toBeInTheDocument()
+      expect(screen.getByRole("listbox")).toBeInTheDocument()
     );
     await user.click(
       screen.getByRole("button", { name: /^process newsletter$/i })
