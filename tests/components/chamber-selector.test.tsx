@@ -15,7 +15,7 @@ describe("ChamberSelector", () => {
     render(<ChamberSelector chambers={seededChambers.slice(0, 2)} onChange={onChange} value="" />);
 
     expect(screen.getByLabelText(/choose a chamber/i)).toBeInTheDocument();
-    await user.selectOptions(screen.getByRole("combobox"), seededChambers[1].id);
+    await user.selectOptions(screen.getByRole("listbox"), seededChambers[1].id);
     expect(onChange).toHaveBeenCalledWith(seededChambers[1].id);
   });
 });

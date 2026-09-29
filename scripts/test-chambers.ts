@@ -1,30 +1,68 @@
 import { seededChambers } from "../lib/db/demo-data";
+import {
+  newsletterPreviewResponseSchema,
+  routeErrorEnvelopeSchema
+} from "../lib/utils/validation";
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
 
 async function main() {
-  const results: { slug: string; name: string; status: string; events: number; error?: string }[] = [];
+  const results: {
+    slug: string;
+    name: string;
+    status: string;
+    events: number;
+    error?: string;
+  }[] = [];
 
   for (const chamber of seededChambers) {
     process.stdout.write(`Testing ${chamber.slug}...`);
     try {
-      const res = await fetch("https://chamber-events-newsletter.vercel.app/api/newsletter/preview", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chamberId: chamber.id })
-      });
+      const res = await fetch(
+        "https://chamber-events-newsletter.vercel.app/api/newsletter/preview",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chamberId: chamber.id })
+        }
+      );
       if (res.ok) {
-        const data = await res.json();
-        const count = data.events?.length ?? 0;
-        results.push({ slug: chamber.slug, name: chamber.name, status: "ok", events: count });
+        const data = newsletterPreviewResponseSchema.parse(await res.json());
+        const count = data.events.length;
+        results.push({
+          slug: chamber.slug,
+          name: chamber.name,
+          status: "ok",
+          events: count
+        });
         console.log(` ✓ ${count} events`);
       } else {
-        const body = await res.json().catch(() => ({})) as Record<string, any>;
-        const msg = body?.error?.message ?? String(res.status);
-        results.push({ slug: chamber.slug, name: chamber.name, status: "error", events: 0, error: msg });
+        const body: unknown = await res.json().catch(() => null);
+        const parsed = routeErrorEnvelopeSchema.safeParse(body);
+        const msg = parsed.success
+          ? parsed.data.error.message
+          : String(res.status);
+        results.push({
+          slug: chamber.slug,
+          name: chamber.name,
+          status: "error",
+          events: 0,
+          error: msg
+        });
         console.log(` ✗ ${msg}`);
       }
-    } catch (e: any) {
-      results.push({ slug: chamber.slug, name: chamber.name, status: "error", events: 0, error: e.message });
-      console.log(` ✗ ${e.message}`);
+    } catch (error: unknown) {
+      const message = errorMessage(error);
+      results.push({
+        slug: chamber.slug,
+        name: chamber.name,
+        status: "error",
+        events: 0,
+        error: message
+      });
+      console.log(` ✗ ${message}`);
     }
     await new Promise((r) => setTimeout(r, 800));
   }
@@ -50,4 +88,4 @@ async function main() {
   }
 }
 
-main();
+void main();

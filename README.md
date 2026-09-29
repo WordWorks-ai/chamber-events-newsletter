@@ -60,7 +60,7 @@ By default, the app can run with the built-in in-memory chamber registry and fix
 
 ## Supabase Setup
 
-This repo ships plain SQL migrations in [`supabase/migrations/001_initial_schema.sql`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/supabase/migrations/001_initial_schema.sql).
+This repo ships plain SQL migrations in [`supabase/migrations/001_initial_schema.sql`](supabase/migrations/001_initial_schema.sql).
 
 Recommended local flow:
 
@@ -98,7 +98,7 @@ pnpm seed:chambers
 
 ## Environment Variables
 
-See [`.env.example`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/.env.example).
+See [`.env.example`](.env.example).
 
 - `APP_URL`: local or deployed app base URL.
 - `SUPABASE_URL`: server-side Supabase project URL.
@@ -138,20 +138,20 @@ See [`.env.example`](/Users/scottcaesar/Documents/GitHub/chamber-events-newslett
 
 ## How To Add a New Chamber
 
-1. Add a new record to [`lib/db/demo-data.ts`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/lib/db/demo-data.ts) for local fallback and tests.
+1. Add a new record to [`lib/db/demo-data.ts`](lib/db/demo-data.ts) for local fallback and tests.
 2. Add the chamber to Supabase with `pnpm seed:chambers`, or insert directly into the `chambers` table.
-3. Add a fixture under [`tests/fixtures/chambers`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/tests/fixtures/chambers) if you want deterministic test coverage.
+3. Add a fixture under [`tests/fixtures/chambers`](tests/fixtures/chambers) if you want deterministic test coverage.
 4. If the chamber uses a new platform, add or update an adapter and corresponding tests.
 
 ## How To Add a New Adapter
 
-1. Create a new adapter file in [`lib/scraping/adapters`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/lib/scraping/adapters).
+1. Create a new adapter file in [`lib/scraping/adapters`](lib/scraping/adapters).
 2. Implement:
    - `name`
    - `canHandle(input)`
    - `extractEvents(input)`
    - `extractBranding(input)`
-3. Register it in [`lib/scraping/adapter-registry.ts`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/lib/scraping/adapter-registry.ts).
+3. Register it in [`lib/scraping/adapter-registry.ts`](lib/scraping/adapter-registry.ts).
 4. Add fixture-driven tests for:
    - detection
    - extraction
@@ -182,12 +182,16 @@ Current coverage targets are enforced in Vitest, with scraping and normalization
 
 ## CI
 
-- [`.github/workflows/ci.yml`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/.github/workflows/ci.yml) runs lint, typecheck, coverage, Playwright, and build on pushes to `main` and pull requests.
-- [`.github/workflows/db-verify.yml`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/.github/workflows/db-verify.yml) reapplies migrations twice against a clean Postgres instance to verify reset safety.
+- [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint, typecheck, coverage, Playwright, and build on pushes to `main` and pull requests.
+- [`.github/workflows/db-verify.yml`](.github/workflows/db-verify.yml) reapplies migrations twice against a clean Postgres instance to verify reset safety.
 
 ## Troubleshooting Fixtures
 
 - Set `SCRAPER_FIXTURE_MODE=true` to bypass live HTTP and use local chamber fixture HTML.
-- If an adapter test fails, inspect the matching file under [`tests/fixtures/chambers`](/Users/scottcaesar/Documents/GitHub/chamber-events-newsletter/tests/fixtures/chambers).
+- If an adapter test fails, inspect the matching file under [`tests/fixtures/chambers`](tests/fixtures/chambers).
 - If branding looks wrong in preview or PDF, start with the chamber record’s explicit logo/favicon/theme fields, then inspect the fixture or source HTML meta tags.
 - If PDF images are missing, confirm they resolve to the same site or a same-domain CDN. Cross-site asset URLs are intentionally ignored.
+
+## License
+
+Licensed under the [MIT License](LICENSE).

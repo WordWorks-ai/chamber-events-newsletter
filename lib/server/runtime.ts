@@ -1,4 +1,7 @@
-import { createChamberRepository, type ChamberRepository } from "@/lib/db/repositories";
+import {
+  createChamberRepository,
+  type ChamberRepository
+} from "@/lib/db/repositories";
 import { fetchHtml } from "@/lib/scraping/fetch-html";
 import type { Result } from "@/lib/utils/result";
 
@@ -10,15 +13,32 @@ interface RuntimeDependencies {
 
 let runtimeOverride: Partial<RuntimeDependencies> | null = null;
 
+function currentTime(): Date {
+  const fixtureNow =
+    process.env.SCRAPER_FIXTURE_MODE === "true"
+      ? process.env.SCRAPER_FIXTURE_NOW
+      : undefined;
+  if (fixtureNow) {
+    const parsed = new Date(fixtureNow);
+    if (!Number.isNaN(parsed.getTime())) {
+      return parsed;
+    }
+  }
+
+  return new Date();
+}
+
 export function getRuntimeDependencies(): RuntimeDependencies {
   return {
     repository: runtimeOverride?.repository ?? createChamberRepository(),
     fetchHtml: runtimeOverride?.fetchHtml ?? fetchHtml,
-    now: runtimeOverride?.now ?? (() => new Date())
+    now: runtimeOverride?.now ?? currentTime
   };
 }
 
-export function setRuntimeDependenciesForTests(overrides: Partial<RuntimeDependencies>) {
+export function setRuntimeDependenciesForTests(
+  overrides: Partial<RuntimeDependencies>
+) {
   runtimeOverride = overrides;
 }
 
